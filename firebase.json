@@ -3,7 +3,8 @@
     "predeploy": [
       "npm --prefix \"$RESOURCE_DIR\" run lint",
       "npm --prefix \"$RESOURCE_DIR\" run build"
-    ]
+    ],
+    "source": "functions"
   },
   "hosting": {
     "public": "public",
@@ -11,10 +12,27 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ], 
-    "rewrites": [ {
-      "source": "**",
-      "function": "app"
-    } ]
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "app"
+      }
+    ]
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "emulators": {
+    "functions": {
+      "port": null
+    },
+    "hosting": {
+      "port": null
+    },
+    "ui": {
+      "enabled": true
+    }
   }
 }
