@@ -1,16 +1,22 @@
 import * as express from "express";
 import * as firebase from "firebase-admin";
 import {animalNames} from "./names"
+const slowDown = require("express-slow-down");
 
 import axios from 'axios'
 
+const speedLimiter = slowDown({
+	windowMs: 1 * 60 * 1000, // 15 minutes
+	delayAfter: 5, // allow 100 requests per 15 minutes, then...
+	delayMs: 5000 
+  });
 const admin = firebase;
 
 const db = firebase.firestore();
 
 export const app = express();
 
-app.get("/ring/:id", async (req, res) => {
+app.get("/ring/:id", speedLimiter, async (req, res) => {
 	console.log(animalNames)
 	console.log("LEN", animalNames.length)
   const localReference = db.collection("Lokale").doc(req.params.id);
@@ -63,42 +69,62 @@ app.post("/register/:id", async (req, res) => {
 app.get("/qrcode", async (req, res) => {
 	const getIdentifier = () => {return animalNames[Math.floor(Math.random() * animalNames.length)]}
 	const qrCodeSize = 200
-	let qrCodeUrl: string;
-	let identifier: string;
 
-	let created: Boolean = false
-	let retry: number = 0
+	var qrCodeUrl: string;
+	var identifier: string;
+	var responseData: Object; 
 
+	var created: Boolean = false
+	var retry: number = 0
+	
 	while (!created && retry < 10) {
-		identifier = `${getIdentifier()}-${getIdentifier()}-${getIdentifier()}`
-		qrCodeUrl = `https://ring.linssenste.com/${identifier}`
 
-		const codeReference = db.collection("codes").doc(identifier);
-		const docHandle = await codeReference.get();
+		try {
 
-		if (!docHandle.exists) {
-			await db.collection("codes").doc(identifier).set({
+			// url identifier containing three animal names (easy access)
+			identifier = `${getIdentifier()}-${getIdentifier()}-${getIdentifier()}`
+			qrCodeUrl = `https://ring.linssenste.com/${identifier}`
+
+			responseData = {
 				created: (+ new Date()), 
 				url: qrCodeUrl, 
 				size: qrCodeSize, 
-			});
-			console.log("CREATED!")
-			created = true;
-			break;
+			}
 
-		} else {
+			const codeReference = db.collection("codes").doc(identifier);
+			const docHandle = await codeReference.get();
+
+			if (!docHandle.exists) {
+				await db.collection("codes").doc(identifier).set(responseData);
+				created = true;
+				break;
+
+			} else {
+				retry += 1
+			}	
+
+		} catch (error) {
+			console.debug(error)
 			retry += 1
 		}
 	}
 	
+	try {
+		// QR Code Generator api
+		let url = `http://api.qrserver.com/v1/create-qr-code/?data=${qrCodeUrl}&size=${qrCodeSize}x${qrCodeSize}`
 
-	let url = `http://api.qrserver.com/v1/create-qr-code/?data=${qrCodeUrl}&size=${qrCodeSize}x${qrCodeSize}`
+		// reformat png response to base64 style
+		const reqResult = await axios.get(url,  {responseType: 'arraybuffer'})
+		let imageData = Buffer.from(reqResult.data, 'binary').toString('base64')
+		imageData = `data:${reqResult.headers['content-type'].toLowerCase()};base64,${imageData}`;
 
-	const reqResult = await axios.get(url,  {responseType: 'arraybuffer'})
-	let imageData = Buffer.from(reqResult.data, 'binary').toString('base64')
-	imageData = `data:${reqResult.headers['content-type'].toLowerCase()};base64,${imageData}`;
-	db.collection("codes").doc(identifier).set({base64: imageData});
-	return res.send(imageData);
+		// update collection document with base64 image
+		db.collection("codes").doc(identifier).update({base64: imageData});
+		return res.send(imageData);
+
+	} catch (error) {
+		return res.status(500).send({error})
+	}
 
   });
 
