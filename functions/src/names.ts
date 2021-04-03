@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 export const animalNames: Array<String> = [
 	"aal", "adler", "alligator", "alpaka", "ameise", "amsel", "anakonda", "antilope",
 	"barsch", "beluga", "biber",  "bisam", "bisamratte", "blauwal", "blindschleiche", "braunbär", "brillenbär", "brillenschlange", "buckelwal", "buntspecht", "bussard",
