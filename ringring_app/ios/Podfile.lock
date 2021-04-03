@@ -1,4 +1,6 @@
 PODS:
+  - audioplayer (0.0.1):
+    - Flutter
   - Firebase/CoreOnly (7.3.0):
     - FirebaseCore (= 7.3.0)
   - Firebase/Messaging (7.3.0):
@@ -7,7 +9,7 @@ PODS:
   - firebase_core (1.0.2):
     - Firebase/CoreOnly (= 7.3.0)
     - Flutter
-  - firebase_messaging (9.0.1):
+  - firebase_messaging (9.1.0):
     - Firebase/Messaging (= 7.3.0)
     - firebase_core
     - Flutter
@@ -38,9 +40,6 @@ PODS:
     - GoogleUtilities/Reachability (~> 7.0)
     - GoogleUtilities/UserDefaults (~> 7.0)
   - Flutter (1.0.0)
-  - "flutter_sound_lite (8.0.0+6)":
-    - Flutter
-    - "tau_sound_core (= 8.0.0+6)"
   - GoogleDataTransport (8.3.0):
     - GoogleUtilities/Environment (~> 7.2)
     - nanopb (~> 2.30907.0)
@@ -76,16 +75,21 @@ PODS:
     - MTBBarcodeScanner
   - shared_preferences (0.0.1):
     - Flutter
-  - "tau_sound_core (8.0.0+6)"
+  - url_launcher (0.0.1):
+    - Flutter
+  - vibration (1.7.3):
+    - Flutter
 
 DEPENDENCIES:
+  - audioplayer (from `.symlinks/plugins/audioplayer/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
-  - flutter_sound_lite (from `.symlinks/plugins/flutter_sound_lite/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - qr_code_scanner (from `.symlinks/plugins/qr_code_scanner/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+  - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
+  - vibration (from `.symlinks/plugins/vibration/ios`)
 
 SPEC REPOS:
   trunk:
@@ -100,35 +104,38 @@ SPEC REPOS:
     - MTBBarcodeScanner
     - nanopb
     - PromisesObjC
-    - tau_sound_core
 
 EXTERNAL SOURCES:
+  audioplayer:
+    :path: ".symlinks/plugins/audioplayer/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
   firebase_messaging:
     :path: ".symlinks/plugins/firebase_messaging/ios"
   Flutter:
     :path: Flutter
-  flutter_sound_lite:
-    :path: ".symlinks/plugins/flutter_sound_lite/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
   qr_code_scanner:
     :path: ".symlinks/plugins/qr_code_scanner/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
+  url_launcher:
+    :path: ".symlinks/plugins/url_launcher/ios"
+  vibration:
+    :path: ".symlinks/plugins/vibration/ios"
 
 SPEC CHECKSUMS:
+  audioplayer: 0584f31a697e4b0bbad405ae7903d7a93585e784
   Firebase: 26223c695fe322633274198cb19dca8cb7e54416
   firebase_core: e6cbb0d1f7091edfcae31559e58224bfc1e455dc
-  firebase_messaging: 446f8b30023ace26f162a9309b5bd1fdff78c011
+  firebase_messaging: 9c746d6c52bb05764e73bbe745d0d698e5afb695
   FirebaseCore: 4d3c72622ce0e2106aaa07bb4b2935ba2c370972
   FirebaseCoreDiagnostics: 066f996579cf097bdad3d7dc9a918d6b9e129c50
   FirebaseInstallations: 7f7ed0e7e27fb51f57291e1876e2ddb1524126c1
   FirebaseInstanceID: aaecc93b4528bbcafea12c477e26827719ca1183
   FirebaseMessaging: 68d1bcb14880189558a8ae57167abe0b7e417232
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
-  flutter_sound_lite: 0abaab31d35384388dcc185bfdd95ed8f13748c8
   GoogleDataTransport: b006084b73915a42c28a3466961a4edda3065da6
   GoogleUtilities: e1d9ed4e544fc32a93e00e721400cbc3f377200d
   MTBBarcodeScanner: f453b33c4b7dfe545d8c6484ed744d55671788cb
@@ -137,8 +144,9 @@ SPEC CHECKSUMS:
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   qr_code_scanner: bb67d64904c3b9658ada8c402e8b4d406d5d796e
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
-  tau_sound_core: c34a32074c96cc960a5b457c91e25211203707cf
+  url_launcher: 6fef411d543ceb26efce54b05a0a40bfd74cbbef
+  vibration: b5a33e764c3f609a975b9dca73dce20fdde627dc
 
-PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
+PODFILE CHECKSUM: 7368163408c647b7eb699d0d788ba6718e18fb8d
 
 COCOAPODS: 1.10.1

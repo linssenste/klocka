@@ -13,105 +13,8 @@ class StartupOperation extends StatelessWidget {
       child: IntroductionScreen(
         showNextButton: false,
         pages: [
-          PageViewModel(
-            title: 'moin',
-            decoration: PageDecoration(pageColor: Colors.grey.shade50),
-            bodyWidget: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [const Text('moin')],
-            ),
-            image: Center(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 30.0, right: 30.0, top: 160),
-                child: Container(
-                  height: 250,
-                  width: 250,
-                  decoration: BoxDecoration(
-                    color: Colors.red.shade200,
-                    borderRadius: BorderRadius.circular(125),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 150,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade50,
-                        borderRadius: BorderRadius.circular(125),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          PageViewModel(
-            title: 'Willkommen',
-            decoration: PageDecoration(pageColor: Colors.grey.shade50),
-            bodyWidget: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [const Text('moin')],
-            ),
-            image: Center(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 30.0, right: 30.0, top: 160),
-                child: Container(
-                  height: 250,
-                  width: 250,
-                  decoration: BoxDecoration(
-                    color: Colors.red.shade200,
-                    borderRadius: BorderRadius.circular(125),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 150,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade50,
-                        borderRadius: BorderRadius.circular(125),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          PageViewModel(
-            title: 'moin',
-            decoration: PageDecoration(pageColor: Colors.grey.shade50),
-            bodyWidget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('moin'),
-                Text("Los geht's"),
-              ],
-            ),
-            image: Center(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 30.0, right: 30.0, top: 160),
-                child: Container(
-                  height: 250,
-                  width: 250,
-                  decoration: BoxDecoration(
-                    color: Colors.red.shade200,
-                    borderRadius: BorderRadius.circular(125),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 150,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade50,
-                        borderRadius: BorderRadius.circular(125),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          welcomePage(),
+          usagePage(),
           PageViewModel(
             decoration: PageDecoration(pageColor: Colors.grey.shade50),
             title: "Los geht's",
@@ -216,5 +119,52 @@ class StartupOperation extends StatelessWidget {
         },
       ),
     ); //;
+  }
+
+  PageViewModel welcomePage() {
+    return templatePage('Willkommen', 'Erklärung und willkommserklärung hier', false);
+  }
+
+  PageViewModel usagePage() {
+    return templatePage('Nutzung', 'Erklärung Nutzung', false);
+  }
+
+  PageViewModel templatePage(String title, String explanation, bool startButton) {
+    return PageViewModel(
+      title: title,
+      decoration: PageDecoration(pageColor: Colors.grey.shade50),
+      bodyWidget: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [Text('${explanation}')],
+          ),
+        ],
+      ),
+      image: Center(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 30.0, right: 30.0, top: 160),
+          child: Container(
+            height: 250,
+            width: 250,
+            decoration: BoxDecoration(
+              color: Colors.red.shade200,
+              borderRadius: BorderRadius.circular(125),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 150,
+                width: 150,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade50,
+                  borderRadius: BorderRadius.circular(125),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

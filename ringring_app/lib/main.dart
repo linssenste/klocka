@@ -4,7 +4,6 @@ import 'package:audioplayer/audioplayer.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:mailto/mailto.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
@@ -13,12 +12,14 @@ import 'package:snapping_sheet/snapping_sheet.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:vibration/vibration.dart';
 
+import 'main.mapper.g.dart';
 import 'screens/startup.dart';
 import 'services/push_service.dart';
 import 'services/storage_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  initializeJsonMapper();
   await StorageService.init();
   StorageService.isFirstStart = true;
   runApp(MyApp());

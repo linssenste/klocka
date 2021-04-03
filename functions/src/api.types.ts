@@ -1,3 +1,4 @@
+/* eslint-disable */
 export type RegisterCompany = {
 	address: {
 		city: string, 

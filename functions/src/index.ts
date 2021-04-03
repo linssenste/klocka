@@ -5,8 +5,13 @@ import {initializeApp} from "firebase-admin";
 
 initializeApp();
 
+const runtimeOpts: any = {
+	timeoutSeconds: 300,
+	memory: '1GB'
+  }
 
 import { apiNode } from "./api";
-const main = express().use("", apiNode);
+const main = express()
+main.use("/api", apiNode);
 
-export const api = functions.region("europe-west3").https.onRequest(main);
+export const webApi = functions.runWith(runtimeOpts).region("europe-west3").https.onRequest(main);

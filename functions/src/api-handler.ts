@@ -4,12 +4,12 @@ import * as firebase from "firebase-admin";
 import * as bcrypt from "bcrypt"
 
 import {Request, Response} from "express"
-import { animalNames } from "./names"
+import { animalNames } from "../assets/names"
 import { RegisterCompany, QrCodeObject } from "./api.types"
 
 const admin = firebase;
 const db = firebase.firestore();
-const { mdToPdf } = require('md-to-pdf');
+// const { mdToPdf } = require('md-to-pdf');
 
 
 async function getCodeData(entryId: string) {
@@ -92,10 +92,10 @@ async function createIdentifier() {
  * @returns status of existence (http stati)
  */
 export async function checkExistence(req: Request, res: Response) {
-
+	console.log("CHECK EXISTENCE!")
 	// Verification if register ID is existent; the QR-Code has to be saved in the database
 	if (!(await getCodeData(req.params.id)).exists) {
-		return res.status(404).send({message: "QR-Code ID does not exist."});
+		return res.status(404).send({message: "QR-Code ID does not exist. ok?"});
 	}
 
 	// Checking whether ID is already registered.
@@ -124,7 +124,7 @@ export async function login(req: Request, res: Response) {
 	if (docHandle != undefined && docHandle.exists) {
 
 		var companyData = docHandle.data()
-		
+
 		if ((await bcrypt.compare(req.body.password, companyData.password)) == true) {
 			delete companyData.password
 			return res.status(200).send(docHandle.data())
@@ -185,9 +185,10 @@ export async function ring(req: Request, res: Response) {
  * @returns QR-Code Sticker (as PDF)
  */
 export async function createSticker(req: Request, res: Response) {
+	console.log("CREATE STICKER")
 
 	var qrCodeData: QrCodeObject = await createIdentifier()
-
+	console.log("CREATED!", qrCodeData)
 	const apiUrl: string = `http://api.qrserver.com/v1/create-qr-code/?data=${qrCodeData.url}&size=${qrCodeData.size}x${qrCodeData.size}&ecc=H&`
 
 	try {
@@ -200,13 +201,14 @@ export async function createSticker(req: Request, res: Response) {
 		// update collection document with base64 image
 		db.collection("codes").doc(qrCodeData.identifier).set(qrCodeData);
 
-		const pdf = await mdToPdf({ content: `\n# QR Code Pdf Placeholder\n\n\n\n<br/><br/>![QR-Code](${qrCodeData.base64})` })
+		//const pdf = await mdToPdf({ content: `\n# QR Code Pdf Placeholder\n\n\n\n<br/><br/>![QR-Code](${qrCodeData.base64})` })
 		// let pdfData = Buffer.from(pdf.content, 'binary').toString('base64')
 
 
-		res.contentType("application/pdf");
-		res.setHeader('Content-Disposition', 'attachment; filename=quote.pdf');
-		return res.send(pdf.content);
+		//res.contentType("application/pdf");
+		//res.setHeader('Content-Disposition', 'attachment; filename=quote.pdf');
+		//return res.send(pdf.content);
+		return res.send(qrCodeData.base64)
 
 	} catch (error) {
 		return res.status(500).send({message: 'Internal sever error occured. Please try again.'})

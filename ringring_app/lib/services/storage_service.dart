@@ -1,4 +1,7 @@
+import 'package:dart_json_mapper/dart_json_mapper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'api_service.dart';
 
 class StorageService {
   static late SharedPreferences _storage; // ohne late --> nicht nullable  sonst nullable type
@@ -36,4 +39,11 @@ class StorageService {
 
   static String get lastRing => _storage.getString('lastRing') ?? '';
   static set lastRing(String lastRing) => _storage.setString('lastRing', lastRing);
+
+  static RegisterData? get registerData => get('register-data');
+  static set registerData(RegisterData? registerData) => set('register-data', registerData);
+
+  static T? get<T>(String key) => JsonMapper.deserialize<T>(_storage.getString(key));
+  static void set<T>(String key, T? value) =>
+      value != null ? _storage.setString(key, JsonMapper.serialize(value)) : _storage.remove(key);
 }
