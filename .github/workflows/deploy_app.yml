@@ -30,7 +30,7 @@ jobs:
           xcodebuild -version 
       
       - name: Write Google-Services File
-        run: 'echo "$GOOGLE_SERVICES" > app/ios/Runner/GoogleService-Info.plist'
+        run: 'echo "$GOOGLE_SERVICES" > ringring_app/ios/Runner/GoogleService-Info.plist'
         shell: bash
         env: 
           GOOGLE_SERVICES: ${{ secrets.IOS_GOOGLE_SERVICES }}
@@ -61,7 +61,7 @@ jobs:
       - name: Upload to TestFlight
         uses: Apple-Actions/upload-testflight-build@master
         with: 
-          app-path: app/build/ios/ipa/app.ipa
+          app-path: ringring_app/build/ios/ipa/app.ipa
           issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
           api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
           api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
