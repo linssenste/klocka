@@ -11,61 +11,60 @@ jobs:
   deploy_ios: 
     name: iOS deployment
     runs-on: macOS-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-  steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-
-    - name: Cache Flutter Dependencies
-      uses: actions/cache@v1
-      with: 
-        path: /Users/runner/hostedtoolcache/flutter
-        key: macos-latest-flutter
-    
-    - name: Setup Flutter
-      uses: subosito/flutter-action@v1
-
-    - name: Run Flutter Doctor
-      run: |
-        flutter doctor
-        xcodebuild -version 
-    
-    - name: Write Google-Services File
-      run: 'echo "$GOOGLE_SERVICES" > app/ios/Runner/GoogleService-Info.plist'
-      shell: bash
-      env: 
-        GOOGLE_SERVICES: ${{ secrets.IOS_GOOGLE_SERVICES }}
-
-    - name: Import CodeSign Certificates
-      uses: Apple-Actions/import-codesign-certs@v1
-      with: 
-        p12-file-base64: ${{ secrets.CERTIFCATES_FILE_BASE64 }}
-        p12-password: ${{ secrets.CERTIFICATES_PASSWORD }}
-
+      - name: Cache Flutter Dependencies
+        uses: actions/cache@v1
+        with: 
+          path: /Users/runner/hostedtoolcache/flutter
+          key: macos-latest-flutter
       
-    - name: Download Provisioning Profiles
-      uses: Apple-Actions/download-provisioning-profiles@v1
-      with: 
-        bundle-id: de.linssenste.ringring
-        issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
-        api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
-        api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
-      
-    - name: Build iOS App
-      run: |
-        cd ringring_app
-        flutter pub get
-        flutter pub run build_runner build 
-        flutter pub run flutter_oss_licenses:generate.dart
-        flutter build ipa --no-sound-null-safety --export-options-plist=ios/ExportOptions.plist
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v1
 
-    - name: Upload to TestFlight
-      uses: Apple-Actions/upload-testflight-build@master
-      with: 
-        app-path: app/build/ios/ipa/app.ipa
-        issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
-        api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
-        api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
+      - name: Run Flutter Doctor
+        run: |
+          flutter doctor
+          xcodebuild -version 
+      
+      - name: Write Google-Services File
+        run: 'echo "$GOOGLE_SERVICES" > app/ios/Runner/GoogleService-Info.plist'
+        shell: bash
+        env: 
+          GOOGLE_SERVICES: ${{ secrets.IOS_GOOGLE_SERVICES }}
+
+      - name: Import CodeSign Certificates
+        uses: Apple-Actions/import-codesign-certs@v1
+        with: 
+          p12-file-base64: ${{ secrets.CERTIFCATES_FILE_BASE64 }}
+          p12-password: ${{ secrets.CERTIFICATES_PASSWORD }}
+
+        
+      - name: Download Provisioning Profiles
+        uses: Apple-Actions/download-provisioning-profiles@v1
+        with: 
+          bundle-id: de.linssenste.ringring
+          issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
+          api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
+          api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
+        
+      - name: Build iOS App
+        run: |
+          cd ringring_app
+          flutter pub get
+          flutter pub run build_runner build 
+          flutter pub run flutter_oss_licenses:generate.dart
+          flutter build ipa --no-sound-null-safety --export-options-plist=ios/ExportOptions.plist
+
+      - name: Upload to TestFlight
+        uses: Apple-Actions/upload-testflight-build@master
+        with: 
+          app-path: app/build/ios/ipa/app.ipa
+          issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
+          api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
+          api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
 
 
 
