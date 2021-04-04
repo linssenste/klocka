@@ -14,7 +14,6 @@ import { registerCompany, createSticker, ring, checkExistence, login } from "./a
 export const apiNode = express();
 
 // API nodes
-
 // -- GET: 
 apiNode.get("/ring/:id", ring); // see API Doc: (digital) ring
 apiNode.get("/sticker/create", createSticker); // see API Doc: Create QR-Codes

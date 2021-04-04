@@ -19,27 +19,6 @@ class StorageService {
   static String get companyLink => _storage.getString('companyLink') ?? '';
   static set companyLink(String companyLink) => _storage.setString('companyLink', companyLink);
 
-  static String get companyDetails => _storage.getString('companyDetails') ?? '';
-  static set companyDetails(String companyDetails) => _storage.setString('companyDetails', companyDetails);
-
-  static String get companyName => _storage.getString('companyName') ?? '';
-  static set companyName(String companyName) => _storage.setString('companyName', companyName);
-
-  static String get contactName => _storage.getString('contactName') ?? '';
-  static set contactName(String contactName) => _storage.setString('contactName', contactName);
-
-  static String get streetName => _storage.getString('streetName') ?? '';
-  static set streetName(String streetName) => _storage.setString('streetName', streetName);
-
-  static String get zipCode => _storage.getString('zipCode') ?? '';
-  static set zipCode(String zipCode) => _storage.setString('zipCode', zipCode);
-
-  static String get cityName => _storage.getString('cityName') ?? '';
-  static set cityName(String cityName) => _storage.setString('cityName', cityName);
-
-  static String get lastRing => _storage.getString('lastRing') ?? '';
-  static set lastRing(String lastRing) => _storage.setString('lastRing', lastRing);
-
   static RegisterData? get registerData => get('register-data');
   static set registerData(RegisterData? registerData) => set('register-data', registerData);
 

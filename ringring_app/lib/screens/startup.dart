@@ -38,12 +38,12 @@ class StartupOperation extends StatelessWidget {
                         String? resultScan =
                             await Navigator.of(context).push(MaterialPageRoute(builder: (context) => ScanCode()));
 
+                        print("HERE!");
                         if (resultScan == null) {
                           return;
                         }
-                        print('TR ${resultScan}');
-                        if (resultScan == "LOGGEDINAUTHCODEPLACEHOLDER") {
-                          print("IN HERE");
+
+                        if (resultScan == "auth-success") {
                           MyApp.of(context)!.endStartup();
                         } else {
                           print('else...');

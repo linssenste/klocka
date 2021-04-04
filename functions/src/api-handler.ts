@@ -55,7 +55,7 @@ async function createIdentifier() {
 		try {
 			// url identifier containing three animal names (easy access)
 			var identifier: string = `${getIdentifier()}-${getIdentifier()}-${getIdentifier()}`
-			var qrCodeUrl: string = `https://ring.linssenste.com/${identifier}`
+			var qrCodeUrl: string = `https://klocka.app/${identifier}`
 
 			var responseData: QrCodeObject = {
 				identifier: identifier,
@@ -92,7 +92,7 @@ async function createIdentifier() {
  * @returns status of existence (http stati)
  */
 export async function checkExistence(req: Request, res: Response) {
-	console.log("CHECK EXISTENCE!")
+	
 	// Verification if register ID is existent; the QR-Code has to be saved in the database
 	if (!(await getCodeData(req.params.id)).exists) {
 		return res.status(404).send({message: "QR-Code ID does not exist. ok?"});
@@ -185,10 +185,9 @@ export async function ring(req: Request, res: Response) {
  * @returns QR-Code Sticker (as PDF)
  */
 export async function createSticker(req: Request, res: Response) {
-	console.log("CREATE STICKER")
 
 	var qrCodeData: QrCodeObject = await createIdentifier()
-	console.log("CREATED!", qrCodeData)
+	
 	const apiUrl: string = `http://api.qrserver.com/v1/create-qr-code/?data=${qrCodeData.url}&size=${qrCodeData.size}x${qrCodeData.size}&ecc=H&`
 
 	try {
@@ -225,6 +224,7 @@ export async function createSticker(req: Request, res: Response) {
  */
 export async function registerCompany(req: Request, res: Response) {
 	
+
 	// Verification that all necessary parameters to register a local have been specified. The request 
 	// aborts if parameters are missing. 
 	if (!req.body.password || !req.body.address || !req.body.address.city ||

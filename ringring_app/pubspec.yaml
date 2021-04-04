@@ -39,6 +39,9 @@ dependencies:
   intl: ^0.17.0
   flutter_spinkit: ^5.0.0
   dart_json_mapper: ^2.0.6
+  flutter_oss_licenses: ^1.0.1
+  modal_bottom_sheet: ^2.0.0
+  google_fonts: ^2.0.0
 
 
 
