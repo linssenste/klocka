@@ -15,7 +15,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initializeJsonMapper();
   await StorageService.init();
-  StorageService.isFirstStart = true;
   runApp(MyApp());
 }
 

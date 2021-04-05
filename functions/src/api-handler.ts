@@ -55,7 +55,7 @@ async function createIdentifier() {
 		try {
 			// url identifier containing three animal names (easy access)
 			var identifier: string = `${getIdentifier()}-${getIdentifier()}-${getIdentifier()}`
-			var qrCodeUrl: string = `https://klocka.app/${identifier}`
+			var qrCodeUrl: string = `https://us-central1-ringring-6a70f.cloudfunctions.net/api/ring/${identifier}`
 
 			var responseData: QrCodeObject = {
 				identifier: identifier,
