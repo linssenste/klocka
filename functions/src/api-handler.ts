@@ -142,7 +142,7 @@ export async function ring(req: Request, res: Response) {
 	const docHandle = await localReference.get();
 
 	if (!docHandle.exists) {
-		res.send(`Oh, Klingel ${req.params.id} existiert nicht`);
+		res.send(`Oh nein, Klingel ${req.params.id} existiert nicht`);
 	} else {
 		await admin.messaging().send({
 			topic: req.params.id,
@@ -170,7 +170,7 @@ export async function ring(req: Request, res: Response) {
 		if (docHandle.data().website) {
 			res.redirect(docHandle.data().company.website)
 		} else {
-			res.send("Es wurde geklingelt.")
+			res.send("Es wurde geklingelt. Yeah!")
 		}
 	}
 	// check if ID exists; if not: empty webseite; else: full website!

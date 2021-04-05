@@ -30,7 +30,7 @@ class RegisterData {
 }
 
 class ApiService {
-  static String baseUrl = 'https://klocka.app';
+  static String baseUrl = 'https://us-central1-ringring-6a70f.cloudfunctions.net/api';
 
   static Future<bool> login(String id, String password) async {
     var response = await http.post(Uri.parse('$baseUrl/auth/$id'), body: {'password': password});
