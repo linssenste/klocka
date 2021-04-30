@@ -33,6 +33,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    precacheImage(AssetImage('assets/intro_1_scan.png'), context);
     return MaterialApp(
       navigatorKey: _navigatorKey,
       title: 'Flutter Demo',
@@ -64,40 +65,6 @@ class _MyAppState extends State<MyApp> {
       PushService.setupNotificationHandler(() async {
         AudioPlayer player = AudioPlayer();
         player.play(file.path, isLocal: true);
-
-        // showDialog(
-        //   context: _navigatorKey.currentContext!,
-        //   builder: (context) {
-        //     Future.delayed(Duration(seconds: 10), () {
-        //       Navigator.of(context).pop(true);
-        //     });
-        //     return AlertDialog(
-        //       title: Text("Ding Dong!"),
-        //       content: Container(
-        //         child: Column(
-        //           mainAxisSize: MainAxisSize.min,
-        //           children: [
-        //             Text('Ein Kunde hat gerade an der Tür geklingelt, der Hilfe benötigt.'),
-        //             SizedBox(height: 10),
-        //             ElevatedButton(
-        //               style: ElevatedButton.styleFrom(
-        //                 primary: Colors.red,
-        //                 elevation: 0,
-        //                 shape: new RoundedRectangleBorder(
-        //                   borderRadius: new BorderRadius.circular(30.0),
-        //                 ),
-        //               ),
-        //               onPressed: () {
-        //                 Navigator.of(context).pop(true);
-        //               },
-        //               child: Text('Schließen'),
-        //             )
-        //           ],
-        //         ),
-        //       ),
-        //     );
-        //   },
-        // );
       });
     });
 

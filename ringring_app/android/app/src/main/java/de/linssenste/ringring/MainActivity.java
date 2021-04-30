@@ -1,4 +1,4 @@
-package de.linssenste.ringring_app;
+package de.linssenste.ringring;
 
 import io.flutter.embedding.android.FlutterActivity;
 

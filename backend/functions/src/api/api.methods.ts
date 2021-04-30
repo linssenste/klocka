@@ -4,12 +4,11 @@ import * as firebase from "firebase-admin";
 import * as bcrypt from "bcrypt"
 
 import {Request, Response} from "express"
-import { animalNames } from "../assets/names"
+import { animalNames } from "../../assets/names"
 import { RegisterCompany, QrCodeObject } from "./api.types"
 
 const admin = firebase;
 const db = firebase.firestore();
-// const { mdToPdf } = require('md-to-pdf');
 
 
 async function getCodeData(entryId: string) {
@@ -153,7 +152,9 @@ export async function ring(req: Request, res: Response) {
 			},
 			android: {
 				notification: {
-					sound: "default",
+					channelId: 'klocka_notification_channel',
+					
+					sound: "bell_sound.wav",
 				},
 			},
 			apns: {
@@ -185,10 +186,11 @@ export async function ring(req: Request, res: Response) {
  * @returns QR-Code Sticker (as PDF)
  */
 export async function createSticker(req: Request, res: Response) {
-
+	console.log("CREATE QRRRRR CODE")
+	
 	var qrCodeData: QrCodeObject = await createIdentifier()
 	
-	const apiUrl: string = `http://api.qrserver.com/v1/create-qr-code/?data=${qrCodeData.url}&size=${qrCodeData.size}x${qrCodeData.size}&ecc=H&`
+	const apiUrl: string = `http://api.qrserver.com/v1/create-qr-code/?data=${qrCodeData.url}&size=${qrCodeData.size}x${qrCodeData.size}&ecc=L&`
 
 	try {
 
@@ -200,14 +202,15 @@ export async function createSticker(req: Request, res: Response) {
 		// update collection document with base64 image
 		db.collection("codes").doc(qrCodeData.identifier).set(qrCodeData);
 
-		//const pdf = await mdToPdf({ content: `\n# QR Code Pdf Placeholder\n\n\n\n<br/><br/>![QR-Code](${qrCodeData.base64})` })
-		// let pdfData = Buffer.from(pdf.content, 'binary').toString('base64')
-
-
-		//res.contentType("application/pdf");
-		//res.setHeader('Content-Disposition', 'attachment; filename=quote.pdf');
-		//return res.send(pdf.content);
-		return res.send(qrCodeData.base64)
+		const buffer = Buffer.from(qrCodeData.base64.replace(/^data:image\/\w+;base64,/, ""), 'base64'); 
+		
+		
+		res.writeHead(200, {
+			'Content-Type': 'image/png',
+			'Content-Length': buffer.length
+		 });
+		 return res.send(buffer)
+		//return res.send(qrCodeData.base64)
 
 	} catch (error) {
 		return res.status(500).send({message: 'Internal sever error occured. Please try again.'})

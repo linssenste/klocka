@@ -1,17 +1,8 @@
 /* eslint-disable */
 import * as express from "express";
-import { registerCompany, createSticker, ring, checkExistence, login } from "./api-handler"
+import { registerCompany, createSticker, ring, checkExistence, login } from "./api.methods"
 
-// const slowDown = require("express-slow-down");
-
-
-// const ringLimiter = slowDown({
-// 	windowMs: 1 * 60 * 1000, // 15 minutes
-// 	delayAfter: 5, // allow 100 requests per 15 minutes, then...
-// 	delayMs: 5000
-// });
-
-export const apiNode = express();
+export const apiNode = express.Router();
 
 // API nodes
 // -- GET: 
@@ -24,6 +15,6 @@ apiNode.post("/register/:id", registerCompany); // see API Doc: Register Company
 apiNode.post("/auth/:id", login); // see API Doc: Authenticate QR-Code
 
 
-
+module.exports = apiNode;
 
 

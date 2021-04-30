@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "899647287366",
+    "project_id": "ringring-6a70f",
+    "storage_bucket": "ringring-6a70f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899647287366:android:bfa9353764e9fb96861a47",
+        "android_client_info": {
+          "package_name": "de.linssenste.ringring"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "899647287366-lpa7oeu07nltvmnj953d3fj2qsrgmiis.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPZRLjCGWF2FqOQ5UhI5DRqhBs7X7UNAg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "899647287366-lpa7oeu07nltvmnj953d3fj2qsrgmiis.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "899647287366-eeeduppupfni2o0ep5sr27625kk5s8a7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "de.linssenste.ringring"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
