@@ -54,7 +54,7 @@ async function createIdentifier() {
 		try {
 			// url identifier containing three animal names (easy access)
 			var identifier: string = `${getIdentifier()}-${getIdentifier()}-${getIdentifier()}`
-			var qrCodeUrl: string = `https://us-central1-ringring-6a70f.cloudfunctions.net/api/ring/${identifier}`
+			var qrCodeUrl: string = `https://klocka.app/ring/${identifier}`//`https://us-central1-ringring-6a70f.cloudfunctions.net/api/ring/${identifier}`
 
 			var responseData: QrCodeObject = {
 				identifier: identifier,
@@ -171,7 +171,15 @@ export async function ring(req: Request, res: Response) {
 		if (docHandle.data().website) {
 			res.redirect(docHandle.data().company.website)
 		} else {
-			res.send("Es wurde geklingelt. Yeah!")
+			res.send(`<!DOCTYPE html>
+			<html>
+			<body>
+			
+			<h1>My First Heading</h1>
+			<p>My first paragraph.</p>
+			
+			</body>
+			</html>`)
 		}
 	}
 	// check if ID exists; if not: empty webseite; else: full website!
@@ -187,7 +195,7 @@ export async function ring(req: Request, res: Response) {
  */
 export async function createSticker(req: Request, res: Response) {
 	console.log("CREATE QRRRRR CODE")
-	
+
 	var qrCodeData: QrCodeObject = await createIdentifier()
 	
 	const apiUrl: string = `http://api.qrserver.com/v1/create-qr-code/?data=${qrCodeData.url}&size=${qrCodeData.size}x${qrCodeData.size}&ecc=L&`
@@ -209,7 +217,8 @@ export async function createSticker(req: Request, res: Response) {
 			'Content-Type': 'image/png',
 			'Content-Length': buffer.length
 		 });
-		 return res.send(buffer)
+
+		 return res.end(buffer)
 		//return res.send(qrCodeData.base64)
 
 	} catch (error) {

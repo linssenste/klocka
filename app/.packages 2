@@ -56,4 +56,4 @@ typed_data:file:///usr/local/lib/flutter/.pub-cache/hosted/pub.dartlang.org/type
 vector_math:file:///usr/local/lib/flutter/.pub-cache/hosted/pub.dartlang.org/vector_math-2.1.0/lib/
 win32:file:///usr/local/lib/flutter/.pub-cache/hosted/pub.dartlang.org/win32-2.0.4/lib/
 xdg_directories:file:///usr/local/lib/flutter/.pub-cache/hosted/pub.dartlang.org/xdg_directories-0.2.0/lib/
-ringring_app:lib/
+app:lib/

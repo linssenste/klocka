@@ -2,9 +2,6 @@
 import * as express from "express";
 import * as functions from "firebase-functions";
 import {initializeApp} from "firebase-admin";
-// import * as firebase from "firebase-admin";
-
-// const admin = firebase;
 
 initializeApp();
 
@@ -13,31 +10,19 @@ const runtimeOpts: any = {
 	memory: '1GB'
   }
 
-const apiNode = require("./src/api");
-const main = express().use('/', apiNode);
+import { registerCompany, createSticker, ring, checkExistence, login } from "./src/api/api.methods"
 
-export const api = functions.runWith(runtimeOpts).region("us-central1").https.onRequest(main);
+const api = express();
 
-// export const weekdayReminder =  functions.pubsub.schedule('0 8 * * 1-5').onRun(async (context) => {
-// 	return await admin.messaging().send({
-// 		topic: 'workday',
-// 		data: {},
-// 		notification: {
-// 			title: "Erinnerung",
-// 			body: "Bitte denken Sie an die Klingel!",
-// 		},
+// API nodes
+// -- GET: 
+api.get("/ring/:id", ring); // see API Doc: (digital) ring
+api.get("/sticker/create", createSticker); // see API Doc: Create QR-Codes
+api.get("/exists/:id", checkExistence); // see API Doc: QR-Code exists
 
-// 	});
-//   });
+// -- POST:
+api.post("/register/:id", registerCompany); // see API Doc: Register Company
+api.post("/auth/:id", login); // see API Doc: Authenticate QR-Code
 
-//   export const saturdayReminder =  functions.pubsub.schedule('0 8 * * 6').onRun(async (context) => {
-// 	return await admin.messaging().send({
-// 		topic: 'weekend',
-// 		data: {},
-// 		notification: {
-// 			title: "Erinnerung",
-// 			body: "Bitte denken Sie an die Klingel. Schönes Wochenende!",
-// 		},
 
-// 	});
-//   });
+exports.api= functions.runWith(runtimeOpts).region("us-central1").https.onRequest(api); //.runWith(runtimeOpts)

@@ -1,32 +1,194 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Klocka.</title>
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/8.3.0/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/8.3.0/firebase-auth.js"></script>
-    <script defer src="/__/firebase/8.3.0/firebase-database.js"></script>
-    <script defer src="/__/firebase/8.3.0/firebase-firestore.js"></script>
-    <script defer src="/__/firebase/8.3.0/firebase-functions.js"></script>
-    <script defer src="/__/firebase/8.3.0/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/8.3.0/firebase-storage.js"></script>
-    <script defer src="/__/firebase/8.3.0/firebase-analytics.js"></script>
-    <script defer src="/__/firebase/8.3.0/firebase-remote-config.js"></script>
-    <script defer src="/__/firebase/8.3.0/firebase-performance.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-  </head>
-  
-  <body>
-    <div >
-		klocka
-    </div>
-  </body>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Klocka.</title>
+</head>
+
+<body style="font-family: sans-serif; background-color: #D51031">
+
+	<div class="noselect logo-container">
+		<img class="noselect klocka-logo" src="./assets/klocka_logo_white.png" /> 
+		<span class="klocka-logo-text">Klocka.</span>
+	</div>
+	
+	<!-- <div class="high-five-area noselect">
+		<img class="high-five-image" src="./assets/happy_high_five_img.png"/>
+	</div> -->
+
+
+	<div class="divider"/>	
+
+	<div style="width: 100%; padding-top: 100px" class="flex-container">
+		<div class="explain-box noselect">
+			<img id="explain-image" src="./assets/intro_1_scan.png" />
+			<div id="explain-header-area"><span id="explain-header-text">Klingeln</span></div>
+			<div id="explain-text-area"><span id="explain-text-text">lkdfmnlkd ckjdnfjkef cekdlmflkdm eljkwfnmljwdkmnf
+					dklsjnfmklsdmkls kldfnlkdsnf slkdfklsdm sdklnfkldsf</span></div>
+		</div>
+		<div class="explain-box noselect">
+			<img id="explain-image" src="./assets/intro_2_ring.png" />
+			<div id="explain-header-area"><span id="explain-header-text">Benachrichtigung</span></div>
+			<div id="explain-text-area"><span id="explain-text-text">lkdfmnlkd ckjdnfjkef cekdlmflkdm eljkwfnmljwdkmnf
+					dklsjnfmklsdmkls kldfnlkdsnf slkdfklsdm sdklnfkldsf</span></div>
+		</div>
+		<div class="explain-box noselect">
+			<img id="explain-image" src="./assets/intro_3_help.png" />
+			<div id="explain-header-area"><span id="explain-header-text">moin</span></div>
+			<div id="explain-text-area"><span id="explain-text-text">lkdfmnlkd ckjdnfjkef cekdlmflkdm eljkwfnmljwdkmnf
+					dklsjnfmklsdmkls kldfnlkdsnf slkdfklsdm sdklnfkldsf</span></div>
+		</div>
+		<div class="explain-box noselect">
+			<img id="explain-image" src="./assets/intro_4_happy.png" />
+			<div id="explain-header-area"><span id="explain-header-text">moin</span></div>
+			<div id="explain-text-area"><span id="explain-text-text">lkdfmnlkd ckjdnfjkef cekdlmflkdm eljkwfnmljwdkmnf
+					dklsjnfmklsdmkls kldfnlkdsnf slkdfklsdm sdklnfkldsf</span></div>
+		</div>
+
+</div>
+</body>
+
+</html>
+
+
+<html>
+<style>
+	.flex-container {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.flex-container>.explain-box {
+		position: relative;
+		background-color: white;
+		height: 400px;
+		min-width: 300px;
+		border-radius: 15px;
+		transition: all .2s ease-in-out;
+		margin: 20px;
+	}
+
+	.explain-box:hover {
+		transform: scale(1.02);
+	}
+
+	#explain-image {
+		position: absolute;
+		margin: auto;
+		height: 250px;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 120px;
+		user-drag: none;
+		user-select: none;
+		-moz-user-select: none;
+		-webkit-user-drag: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+
+	#explain-header-area {
+		position: absolute;
+		bottom: 90px;
+		left: 0;
+		text-align: center;
+		width: 100%;
+
+	}
+
+	#explain-header-text {
+		font-size: 28px;
+		border-bottom: 3px solid #D51031;
+		padding-bottom: 2px;
+
+	}
+
+	#explain-text-area {
+		position: absolute;
+		top: 320px;
+		left: 0;
+		text-align: center;
+		width: 100%;
+
+	}
+
+	#explain-text-text {
+		font-size: 15px;
+		font-weight: 100;
+
+	}
+
+	.noselect {
+		cursor: default;
+		-webkit-touch-callout: none;
+		/* iOS Safari */
+		-webkit-user-select: none;
+		/* Safari */
+		-khtml-user-select: none;
+		/* Konqueror HTML */
+		-moz-user-select: none;
+		/* Old versions of Firefox */
+		-ms-user-select: none;
+		/* Internet Explorer/Edge */
+		user-select: none;
+		/* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+	}
+
+	.klocka-logo {
+		pointer-events: none;
+		height: 50px;
+	}
+
+	.klocka-logo-text {
+		color: white;
+		font-size: 35px;
+		font-weight: 100;
+		height: 50px;
+		left: 60px;
+		margin-top: 5px;
+		position: absolute;
+		top: 50%;
+		-webkit-transform: translateY(-50%);
+		-ms-transform: translateY(-50%);
+		-o-transform: translateY(-50%);
+		transform: translateY(-50%)
+	}
+
+	.logo-container {
+		position: absolute;
+		width: 180px;
+		left: 50%; 
+		transform: translateX(-50%);
+		display: table-cell;
+		vertical-align: middle;
+	}
+
+	.high-five-area {
+		position: relative;
+		height: 300px; 
+		width: 300px; 
+		border-radius: 150px;
+	}
+	.high-five-image {
+		pointer-events: none;
+		height: 500px;
+	}
+	.how-it-works-container {
+		position: relative; 
+		background-color: red;
+	}
+	.divider {
+		height: 1px; 
+		
+		width: 100%;
+		background-color: white;
+	}
+</style>
+
 </html>

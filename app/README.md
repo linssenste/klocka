@@ -1,4 +1,4 @@
-# ringring_app
+# app
 
 Ring app lol
 

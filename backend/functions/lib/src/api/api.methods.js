@@ -42,7 +42,7 @@ async function createIdentifier() {
         try {
             // url identifier containing three animal names (easy access)
             var identifier = `${getIdentifier()}-${getIdentifier()}-${getIdentifier()}`;
-            var qrCodeUrl = `https://us-central1-ringring-6a70f.cloudfunctions.net/api/ring/${identifier}`;
+            var qrCodeUrl = `https://klocka.app/ring/${identifier}`; //`https://us-central1-ringring-6a70f.cloudfunctions.net/api/ring/${identifier}`
             var responseData = {
                 identifier: identifier,
                 created: (+new Date()),
@@ -145,7 +145,15 @@ async function ring(req, res) {
             res.redirect(docHandle.data().company.website);
         }
         else {
-            res.send("Es wurde geklingelt. Yeah!");
+            res.send(`<!DOCTYPE html>
+			<html>
+			<body>
+			
+			<h1>My First Heading</h1>
+			<p>My first paragraph.</p>
+			
+			</body>
+			</html>`);
         }
     }
     // check if ID exists; if not: empty webseite; else: full website!
@@ -173,7 +181,7 @@ async function createSticker(req, res) {
             'Content-Type': 'image/png',
             'Content-Length': buffer.length
         });
-        return res.send(buffer);
+        return res.end(buffer);
         //return res.send(qrCodeData.base64)
     }
     catch (error) {

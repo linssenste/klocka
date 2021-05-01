@@ -1,38 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.api = void 0;
 /* eslint-disable */
 const express = require("express");
 const functions = require("firebase-functions");
 const firebase_admin_1 = require("firebase-admin");
-// import * as firebase from "firebase-admin";
-// const admin = firebase;
 firebase_admin_1.initializeApp();
 const runtimeOpts = {
     timeoutSeconds: 300,
     memory: '1GB'
 };
-const apiNode = require("./src/api");
-const main = express().use('/', apiNode);
-exports.api = functions.runWith(runtimeOpts).region("us-central1").https.onRequest(main);
-// export const weekdayReminder =  functions.pubsub.schedule('0 8 * * 1-5').onRun(async (context) => {
-// 	return await admin.messaging().send({
-// 		topic: 'workday',
-// 		data: {},
-// 		notification: {
-// 			title: "Erinnerung",
-// 			body: "Bitte denken Sie an die Klingel!",
-// 		},
-// 	});
-//   });
-//   export const saturdayReminder =  functions.pubsub.schedule('0 8 * * 6').onRun(async (context) => {
-// 	return await admin.messaging().send({
-// 		topic: 'weekend',
-// 		data: {},
-// 		notification: {
-// 			title: "Erinnerung",
-// 			body: "Bitte denken Sie an die Klingel. Schönes Wochenende!",
-// 		},
-// 	});
-//   });
+const api_methods_1 = require("./src/api/api.methods");
+const api = express();
+// API nodes
+// -- GET: 
+api.get("/ring/:id", api_methods_1.ring); // see API Doc: (digital) ring
+api.get("/sticker/create", api_methods_1.createSticker); // see API Doc: Create QR-Codes
+api.get("/exists/:id", api_methods_1.checkExistence); // see API Doc: QR-Code exists
+// -- POST:
+api.post("/register/:id", api_methods_1.registerCompany); // see API Doc: Register Company
+api.post("/auth/:id", api_methods_1.login); // see API Doc: Authenticate QR-Code
+exports.api = functions.runWith(runtimeOpts).region("us-central1").https.onRequest(api); //.runWith(runtimeOpts)
 //# sourceMappingURL=index.js.map
