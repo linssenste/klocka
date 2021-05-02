@@ -19,33 +19,34 @@
 	</div> -->
 
 
-	<div class="divider"/>	
-
-	<div style="width: 100%; padding-top: 100px" class="flex-container">
+	
+	
+	<div style="width: 100%; padding-top: 80px" class="flex-container">
+		
 		<div class="explain-box noselect">
 			<img id="explain-image" src="./assets/intro_1_scan.png" />
 			<div id="explain-header-area"><span id="explain-header-text">Klingeln</span></div>
-			<div id="explain-text-area"><span id="explain-text-text">lkdfmnlkd ckjdnfjkef cekdlmflkdm eljkwfnmljwdkmnf
-					dklsjnfmklsdmkls kldfnlkdsnf slkdfklsdm sdklnfkldsf</span></div>
+			<div id="explain-text-area"><span id="explain-text-text">Der hilfebenötigende Mensch kann durch das Einscannen des angebrachten QR-Codes ganz leicht die Klingel auslösen.</span></div>
 		</div>
 		<div class="explain-box noselect">
 			<img id="explain-image" src="./assets/intro_2_ring.png" />
 			<div id="explain-header-area"><span id="explain-header-text">Benachrichtigung</span></div>
-			<div id="explain-text-area"><span id="explain-text-text">lkdfmnlkd ckjdnfjkef cekdlmflkdm eljkwfnmljwdkmnf
-					dklsjnfmklsdmkls kldfnlkdsnf slkdfklsdm sdklnfkldsf</span></div>
+			<div id="explain-text-area"><span id="explain-text-text">Nun erhälst du eine Benachrichtigung in Form eines Klingelns & wirst auf die Person aufmerksam gemacht.</span></div>
 		</div>
 		<div class="explain-box noselect">
 			<img id="explain-image" src="./assets/intro_3_help.png" />
-			<div id="explain-header-area"><span id="explain-header-text">moin</span></div>
-			<div id="explain-text-area"><span id="explain-text-text">lkdfmnlkd ckjdnfjkef cekdlmflkdm eljkwfnmljwdkmnf
-					dklsjnfmklsdmkls kldfnlkdsnf slkdfklsdm sdklnfkldsf</span></div>
+			<div id="explain-header-area"><span id="explain-header-text">Hilfestellung</span></div>
+			<div id="explain-text-area"><span id="explain-text-text">Jetzt kannst du der Person Hilfestellung leisten & ihr das Hineinkommen ermöglichen.</span></div>
 		</div>
 		<div class="explain-box noselect">
 			<img id="explain-image" src="./assets/intro_4_happy.png" />
-			<div id="explain-header-area"><span id="explain-header-text">moin</span></div>
-			<div id="explain-text-area"><span id="explain-text-text">lkdfmnlkd ckjdnfjkef cekdlmflkdm eljkwfnmljwdkmnf
-					dklsjnfmklsdmkls kldfnlkdsnf slkdfklsdm sdklnfkldsf</span></div>
+			<div id="explain-header-area"><span id="explain-header-text">Geschafft</span></div>
+			<div id="explain-text-area"><span id="explain-text-text">Jetzt kann jede*r bei dir im Laden problemlos einkaufen.</span></div>
 		</div>
+
+		<span class="work-in-progress">Klocka ist eine work-in-progress App Idee, eine Art virtuelle Türklingel, mit der hilfsbedürftige Menschen einfacher Hilfe bekommen sollen, um in Läden oder Lokale zu kommen. Die App soll ein Baustein für eine inklusivere Gesellschaft sein.</span>
+		
+		
 
 </div>
 </body>
@@ -65,7 +66,7 @@
 	.flex-container>.explain-box {
 		position: relative;
 		background-color: white;
-		height: 400px;
+		height: 420px;
 		min-width: 300px;
 		border-radius: 15px;
 		transition: all .2s ease-in-out;
@@ -83,7 +84,7 @@
 		top: 0;
 		left: 0;
 		right: 0;
-		bottom: 120px;
+		bottom: 130px;
 		user-drag: none;
 		user-select: none;
 		-moz-user-select: none;
@@ -94,7 +95,7 @@
 
 	#explain-header-area {
 		position: absolute;
-		bottom: 90px;
+		bottom: 100px;
 		left: 0;
 		text-align: center;
 		width: 100%;
@@ -110,10 +111,12 @@
 
 	#explain-text-area {
 		position: absolute;
-		top: 320px;
+		top: 330px;
 		left: 0;
 		text-align: center;
-		width: 100%;
+		width: 90%;
+		left: 50%; 
+		transform: translateX(-50%);
 
 	}
 
@@ -188,6 +191,13 @@
 		
 		width: 100%;
 		background-color: white;
+	}
+	.work-in-progress {
+		margin-top: 50px;
+		color: white;
+		font-weight: 100;
+		font-size: 20px;
+		text-align: center;
 	}
 </style>
 
