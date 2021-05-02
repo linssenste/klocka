@@ -8,6 +8,8 @@ firebase-debug.log*
 firebase-debug.*.log*
 
 
+backend/lib/
+
 # Firebase cache
 .firebase/
 
