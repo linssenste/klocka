@@ -33,7 +33,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     var code = widget.resultScan.split("/").last;
 
-    final node = FocusScope.of(context);
+    // final node = FocusScope.of(context);
 
     return ToolbarWidget(
       'Registrieren',
@@ -103,7 +103,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               labelText: 'Lokalname*',
                             ),
-                            onEditingComplete: () => node.nextFocus(),
+                            // onEditingComplete: () => node.nextFocus(),
                           ),
                           SizedBox(height: 20),
                           TextFormField(
@@ -123,7 +123,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               labelText: 'Ansprechpartner*',
                             ),
-                            onEditingComplete: () => node.unfocus(),
+                            // onEditingComplete: () => node.unfocus(),
                           ),
                           SizedBox(height: 20),
                         ],
@@ -156,7 +156,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               labelText: 'Straße & Hausnummer',
                             ),
-                            onEditingComplete: () => node.nextFocus(),
+                            // onEditingComplete: () => node.nextFocus(),
                           ),
                           SizedBox(height: 30),
                           TextFormField(
@@ -177,7 +177,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               labelText: 'Postleitzahl (PLZ)',
                             ),
-                            onEditingComplete: () => node.nextFocus(),
+                            // onEditingComplete: () => node.nextFocus(),
                           ),
                           SizedBox(height: 10),
                           TextFormField(
@@ -196,7 +196,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               labelText: 'Stadt',
                             ),
-                            onEditingComplete: () => node.unfocus(),
+                            // onEditingComplete: () => node.unfocus(),
                           ),
                           SizedBox(height: 20),
                         ],
@@ -265,7 +265,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               labelText: 'Passwort',
                             ),
-                            onEditingComplete: () => node.unfocus(),
+                            // onEditingComplete: () => node.unfocus(),
                           ),
                           SizedBox(height: 20),
                           TextFormField(
@@ -285,7 +285,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               labelText: 'Passwort verifizieren',
                             ),
-                            onEditingComplete: () => node.unfocus(),
+                            // onEditingComplete: () => node.unfocus(),
                           ),
                           SizedBox(height: 40),
                           if (isLoading)
@@ -335,7 +335,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       isLoading = true;
     });
 
-    FocusScope.of(context).unfocus();
+    // FocusScope.of(context).unfocus();
     var code = widget.resultScan.split("/").last;
     await FirebaseMessaging.instance.subscribeToTopic(code.toString());
 
@@ -369,11 +369,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   tapped(int step) {
     setState(() => {_currentStep = step});
-    FocusManager.instance.primaryFocus?.unfocus();
+    // FocusManager.instance.primaryFocus?.unfocus();
   }
 
   continued() {
-    FocusManager.instance.primaryFocus?.unfocus();
+    // FocusManager.instance.primaryFocus?.unfocus();
     print(_currentStep);
 
     _currentStep < 4 ? setState(() => _currentStep += 1) : null;

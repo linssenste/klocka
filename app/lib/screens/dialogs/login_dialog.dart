@@ -128,8 +128,6 @@ class _LoginDialogState extends State<LoginDialog> {
   }
 
   submitPassword() async {
-    FocusManager.instance.primaryFocus?.unfocus();
-
     setState(() {
       loadingLogin = true;
     });
